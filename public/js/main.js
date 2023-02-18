@@ -11,14 +11,24 @@ var socket = io();
 function addNewMessage(message) {
     vm.messages.push(message);
 }
-function handelTypingEvent(user) {
-    console.log('someone is typing');
-}
+
 
 function setUserID({ sID }) {
     vm.socketID = sID;
 }
 
+
+function handelTypingEvent(user) {
+    const messageContainer = document.getElementById('message-container');
+    const message = 'Someone is typing...';
+  
+    // Check if the current window name is "main" (or any other name you want to use)
+    if (window.name === 'main') {
+      console.log(message);
+      messageContainer.innerText = message;
+    }
+  }
+  
 
 const { createApp } = Vue
 
@@ -28,7 +38,7 @@ const vm = createApp({
             socketID: '',
             message: '',
             messages: [],
-            nickname: ''
+            //nickname: ''
         }
     },
 
@@ -38,7 +48,7 @@ const vm = createApp({
 
             socket.emit('chat_message', {
                 content: this.message,
-                name: this.nickname || 'anonymous',
+                //name: this.nickname || 'anonymous',
                 id: this.socketID
             });
 
