@@ -7,38 +7,44 @@
     <title>Chat App with Node and Socket</title>
   </head>
   <body>
-    <h1>My Super Chat App</h1>
-
     <main id="app">
-      <section>
-        <h2>Input messages here:</h2>
+      <div class="name-section">
+        <img src="images/avatar.jpg" alt="">
+        <p> Name</p>
+        <div class="message-container"></div>
+      </div>
+  <!--      <h2>Input messages here:</h2>
         <input
           v-model="nickname"
           id="nickname"
           type="text"
           placeholder="Nickname?"
         />
-
-        <form>
-          <label for="message">Something to say?</label>
+    -->
+     <section class="chat-messages">
+        
+        <ul id="messages">
+          <!-- render a new message component for every message -->
+          <newmsg v-for="message in messages" :message="message"></newmsg>
+        </ul>
+        
+      </section>
+        <div class="message-input">
+          
+          <!--<label for="message">Something to say?</label>-->
           <textarea
             @focus="dispatchTypingEvent"
             v-model="message"
             id="textarea"
             class="message"
-            autocomplete="off"
+            
           ></textarea>
-          <input @click.prevent="dispatchMessage" type="submit" value="Send" />
-        </form>
+
+          <input @click.prevent="dispatchMessage" type="submit" value="Send"  class="send"/>
+        </div>
       </section>
 
-      <section class="messages">
-        <h2>Receive messages here:</h2>
-        <ul id="messages">
-          <!-- render a new message component for every message -->
-          <newmsg v-for="message in messages" :message="message"></newmsg>
-        </ul>
-      </section>
+     
     </main>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
